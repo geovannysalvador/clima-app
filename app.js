@@ -15,14 +15,21 @@ const main = async() => {
             case 1:
                 // Mostrar mensaje
                 const lugaresABuscar = await leerInput('Ingrese la ciudad a buscar:');
+
                 // Buscar lugares
                 const lugares = await busqueda.ciudad(lugaresABuscar);
+
                 // Seleccionar lugar
                 const idSelecc = await listarLugares(lugares);
+                    // prevenir error si no quiere seleccionar nada
+                    if( idSelecc === '0') continue;                    
                 const lugarSeleccionado = lugares.find( lugar => lugar.id === idSelecc );
+                    busqueda.agregarHistorial(lugarSeleccionado.nombre)
+
                 // Clima
                 // necesito extreaer lat y lon del lugar seleccionado
                 const climaLugar = await busqueda.climaLugar( lugarSeleccionado.latitud, lugarSeleccionado.longitud );
+
                 // Mostrar resultados
                 console.clear();
                 console.log('\nInformacion de la ciudad\n'.green);
@@ -37,7 +44,11 @@ const main = async() => {
             break;
             
             case 2:
-                
+                console.log();
+                busqueda.historial.forEach((lugar, i) =>{
+                    const idx =`${ i+1}`.green;
+                    console.log(`${idx} ${lugar}`);
+                } )
             break;
             
         
