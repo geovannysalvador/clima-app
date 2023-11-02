@@ -21,14 +21,18 @@ const main = async() => {
                 const idSelecc = await listarLugares(lugares);
                 const lugarSeleccionado = lugares.find( lugar => lugar.id === idSelecc );
                 // Clima
+                // necesito extreaer lat y lon del lugar seleccionado
+                const climaLugar = await busqueda.climaLugar( lugarSeleccionado.latitud, lugarSeleccionado.longitud );
                 // Mostrar resultados
+                console.clear();
                 console.log('\nInformacion de la ciudad\n'.green);
                 console.log('Nombre:', lugarSeleccionado.nombre);
                 console.log('Longitud:', lugarSeleccionado.longitud);
                 console.log('Latitud:', lugarSeleccionado.latitud);
-                console.log('');
-                console.log('');
-                console.log('');
+                console.log('Temperatura:', climaLugar.temp);
+                console.log('Temp minima', climaLugar.min);
+                console.log('Temp maxima',climaLugar.max);
+                console.log('como esta el clima:',climaLugar.desc);
                 
             break;
             
