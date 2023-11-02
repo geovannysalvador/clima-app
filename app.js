@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {inquirerMenu, pausa, leerInput, listaTareasBorrar, confirmar, mostrarListadoCheckList} = require('./helpers/inquirer.js');
+const {inquirerMenu, pausa, leerInput, listarLugares, confirmar, mostrarListadoCheckList} = require('./helpers/inquirer.js');
 const Busquedas = require('./models/busquedas.js');
 
 
@@ -14,16 +14,18 @@ const main = async() => {
         switch (opt) {
             case 1:
                 // Mostrar mensaje
-                const lugar = await leerInput('Ingrese la ciudad a buscar:');
-                await busqueda.ciudad(lugar)
+                const lugaresABuscar = await leerInput('Ingrese la ciudad a buscar:');
                 // Buscar lugares
+                const lugares = await busqueda.ciudad(lugaresABuscar);
                 // Seleccionar lugar
+                const idSelecc = await listarLugares(lugares);
+                const lugarSeleccionado = lugares.find( lugar => lugar.id === idSelecc );
                 // Clima
                 // Mostrar resultados
                 console.log('\nInformacion de la ciudad\n'.green);
-                console.log('');
-                console.log('');
-                console.log('');
+                console.log('Nombre:', lugarSeleccionado.nombre);
+                console.log('Longitud:', lugarSeleccionado.longitud);
+                console.log('Latitud:', lugarSeleccionado.latitud);
                 console.log('');
                 console.log('');
                 console.log('');
@@ -34,9 +36,6 @@ const main = async() => {
                 
             break;
             
-            case 3:
-                
-            break;
         
 
         }

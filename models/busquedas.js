@@ -26,11 +26,15 @@ class Busquedas {
                 params: this.paramsMapbox,
             });
 
+             // Regresa todos los lugares
             const respuesta = await instance.get();
-            console.log(respuesta.data);
+            return respuesta.data.features.map( lugar => ({
+                id: lugar.id,
+                nombre: lugar.place_name,
+                longitud: lugar.center[0],
+                latitud:  lugar.center[1],
+            }));
 
-            // Regresa todos los lugares
-            return [];
 
         } catch (error) {
             return [];
