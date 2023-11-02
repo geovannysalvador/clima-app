@@ -8,6 +8,11 @@ class Busquedas {
 
     constructor() {
         // Leer la bd si existe
+        this.leerBD();
+    }
+
+    get historialCapitalizado(){
+        return this.historial;
     }
 
     get paramsMapbox() {
@@ -100,7 +105,14 @@ class Busquedas {
     }
 
     leerBD(){
+        // ver si existe sino ya por defecto es vacio
+        if( !fs.existsSync(this.pathdb)) return;
+        //  si si existe hacer esto
+        const information = fs.readFileSync(this.pathdb, {encoding:'utf-8'});
+        // regresr el formato a json
+        const data = JSON.parse(information);
 
+        this.historial =  data.historial;
     }
 
 }
