@@ -45,7 +45,7 @@ const main = async() => {
             
             case 2:
                 console.log();
-                busqueda.historial.forEach((lugar, i) =>{
+                busqueda.historialCapitalizado.forEach((lugar, i) =>{
                     const idx =`${ i+1}`.green;
                     console.log(`${idx} ${lugar}`);
                 } )

@@ -12,7 +12,14 @@ class Busquedas {
     }
 
     get historialCapitalizado(){
-        return this.historial;
+        // Capitalizar
+        return this.historial.map(lugares =>{
+            let palabras =  lugares.split(' ');
+            // de cada palabra la primera letra se vuelve en mayuscula y se le agrega el estro de la palabra
+            palabras = palabras.map( palabra => palabra[0].toUpperCase() + palabra.substring(1))
+
+            return palabras.join(' ')
+        })
     }
 
     get paramsMapbox() {
